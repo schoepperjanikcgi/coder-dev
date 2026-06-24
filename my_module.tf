@@ -33,18 +33,15 @@ resource "coder_script" "git_clone_custom" {
   agent_id           = var.agent_id
   script             = <<-EOT
     #!/bin/bash
-    echo "So far so good"
-
-    mkdir -p ~/.ssh
+    echo "Starting custom git clone module"
 
     if ! grep -q github.com ~/.ssh/known_hosts 2>/dev/null; then
+      mkdir -p ~/.ssh
       ssh-keyscan github.com >> ~/.ssh/known_hosts
     fi
 
     echo "Test if git exists"
     git --version
-    echo "GIT_SSH_COMMAND=$GIT_SSH_COMMAND"
-    env | grep GIT
 
     echo "Test if git clone works"
     if [ ! -d ~/nodejs-test ]; then
