@@ -33,6 +33,7 @@ resource "coder_script" "git_clone_custom" {
   agent_id           = var.agent_id
   script             = <<-EOT
     #!/bin/bash
+    echo "So far so good"
 
     mkdir -p ~/.ssh
 
