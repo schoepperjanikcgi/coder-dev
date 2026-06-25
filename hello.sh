@@ -1,4 +1,6 @@
 #!/bin/bash
 
-# Output
+GREETING="${GREETING}"
+NAME="${NAME}"
+
 echo "$GREETING, $NAME!"
