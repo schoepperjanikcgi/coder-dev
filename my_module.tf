@@ -15,7 +15,7 @@ terraform {
 }
 
 # Start a container
-resource "docker_container" "python" {
+/* resource "docker_container" "python" {
   name  = "foo"
   image = "codercom/ubuntu-dev-python3.7"
 
@@ -23,6 +23,21 @@ resource "docker_container" "python" {
     "sh",
     "-c",
     "python --version"
+  ]
+} */
+
+resource "docker_image" "alpine" {
+  name = "alpine:latest"
+}
+
+resource "docker_container" "test" {
+  image = docker_image.alpine.image_id
+  name  = "module-test-container"
+
+  command = [
+    "sh",
+    "-c",
+    "while true; do echo Hello; sleep 60; done"
   ]
 }
 
