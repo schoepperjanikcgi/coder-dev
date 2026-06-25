@@ -4,10 +4,11 @@ terraform {
    required_providers {
     coder = {
       source  = "coder/coder"
-      version = ">= 0.12"
     }
   } 
 }
+
+data "coder_workspace_owner" "me" {}
 
 variable "url" {
   description = "The URL of the Git repository."
@@ -56,4 +57,8 @@ resource "coder_script" "git_clone_custom" {
   icon               = "/icon/git.svg"
   run_on_start       = true
   start_blocks_login = true
+}
+
+output "owner" {
+  value = data.coder_workspace_owner.me.name
 }
