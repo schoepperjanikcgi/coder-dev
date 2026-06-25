@@ -8,7 +8,6 @@ terraform {
   } 
 }
 
-data "coder_workspace_owner" "me" {}
 
 variable "url" {
   description = "The URL of the Git repository."
