@@ -48,18 +48,14 @@ resource "coder_script" "git_clone_custom" {
     if [ ! -d ~/nodejs-test ]; then
       echo "Actually cloning..."
       echo "Cloning ${var.url} into ${local.base_dir}/nodejs-test"
-      echo "Data ${data.coder_workspace_owner.me.name}"
+      
       git clone "${var.url}" "${local.base_dir}/nodejs-test"
     fi
-
+    echo "Data ${data.coder_workspace_owner.me.name}"
     echo "Git clone finish"
   EOT
   display_name       = "Git Clone Custom"
   icon               = "/icon/git.svg"
   run_on_start       = true
   start_blocks_login = true
-}
-
-output "owner" {
-  value = data.coder_workspace_owner.me.name
 }
