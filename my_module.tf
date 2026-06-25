@@ -5,8 +5,27 @@ terraform {
     coder = {
       source  = "coder/coder"
     }
-  } 
+    docker = {
+      source  = "kreuzwerker/docker"
+    } 
+/*     aws = {
+      source  = "hashicorp/aws"
+    } */
+  }
 }
+
+# Start a container
+resource "docker_container" "python" {
+  name  = "foo"
+  image = "codercom/ubuntu-dev-python3.7"
+
+    command = [
+    "sh",
+    "-c",
+    "python --version"
+  ]
+}
+
 
 data "coder_workspace_owner" "me" {}
 
