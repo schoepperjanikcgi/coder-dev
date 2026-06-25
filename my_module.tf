@@ -14,13 +14,18 @@ terraform {
   }
 }
 
+variable "container_name" {
+  description = "Name of the container."
+  type        = string
+}
+
 resource "docker_image" "alpine" {
   name = "alpine:latest"
 }
 
 resource "docker_container" "test" {
   image = docker_image.alpine.image_id
-  name  = "module-test-container"
+  name  = var.container_name
 
   command = [
     "sh",
