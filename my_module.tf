@@ -14,18 +14,6 @@ terraform {
   }
 }
 
-# Start a container
-/* resource "docker_container" "python" {
-  name  = "foo"
-  image = "codercom/ubuntu-dev-python3.7"
-
-    command = [
-    "sh",
-    "-c",
-    "python --version"
-  ]
-} */
-
 resource "docker_image" "alpine" {
   name = "alpine:latest"
 }
@@ -39,7 +27,7 @@ resource "docker_container" "test" {
     "-c",
     "while true; do echo Hello; sleep 60; done"
   ]
-}
+} 
 
 
 data "coder_workspace_owner" "me" {}
