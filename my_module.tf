@@ -5,10 +5,15 @@ terraform {
     coder = {
       source  = "coder/coder"
     }
-    aws = {
-      source = "hashicorp/aws"
+    docker = {
+      source = "kreuzwerker/docker"
     }
   } 
+}
+
+resource "docker_container" "ubuntu" {
+  name  = "foo"
+  image = "codercom/ubuntu-dev-python3.7"
 }
 
 data "coder_workspace_owner" "me" {}
