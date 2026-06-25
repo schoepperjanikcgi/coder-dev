@@ -5,15 +5,7 @@ terraform {
     coder = {
       source  = "coder/coder"
     }
-    docker = {
-      source = "kreuzwerker/docker"
-    }
   } 
-}
-
-resource "docker_container" "ubuntu" {
-  name  = "foo"
-  image = "codercom/ubuntu-dev-python3.7"
 }
 
 data "coder_workspace_owner" "me" {}
@@ -36,6 +28,10 @@ variable "agent_id" {
 
 locals {
   base_dir = var.base_dir != "" ? var.base_dir : "$HOME"
+  encoded_clone_script = base64encode(templatefile("${path.module}/hello.sh", {
+    GREETING          = "Seid gegrüßt",
+    NAME              = "Thomas",
+  }))
 }
 
 resource "coder_script" "git_clone_custom" {
@@ -61,6 +57,13 @@ resource "coder_script" "git_clone_custom" {
     fi
     echo "Data ${data.coder_workspace_owner.me.name}"
     echo "Git clone finish"
+
+    echo "Start the script"
+    echo -n '${local.encoded_clone_script}' | base64 -d > "${local.base_dir}/hello.sh"
+    chmod +x "${local.base_dir}/hello.sh"
+
+    "${local.base_dir}/hello.sh" 2>&1
+
   EOT
   display_name       = "Git Clone Custom"
   icon               = "/icon/git.svg"
