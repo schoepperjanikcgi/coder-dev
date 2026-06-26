@@ -8,10 +8,14 @@ terraform {
     docker = {
       source  = "kreuzwerker/docker"
     } 
-/*     aws = {
-      source  = "hashicorp/aws"
-    } */
+    local = {
+      source = "hashicorp/local"
+    }
   }
+}
+
+data "local_file" "test_file" {
+  filename = "/mnt/c/Users/janik.schoepper/git/test.txt"
 }
 
 variable "container_name" {
@@ -92,6 +96,8 @@ resource "coder_script" "git_clone_custom" {
     chmod +x "${local.base_dir}/hello.sh"
 
     "${local.base_dir}/hello.sh" 2>&1
+
+    echo "Test.txt content:  ${data.local_file.test_file.content})"
     coder exp sync complete "git-clone-custom"
   EOT
   display_name       = "Git Clone Custom"
