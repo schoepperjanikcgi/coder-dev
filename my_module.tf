@@ -19,12 +19,13 @@ variable "container_name" {
   type        = string
 }
 
-resource "docker_image" "alpine" {
-  name = "alpine:latest"
+variable "image_name" {
+  description = "Name of the Docker image."
+  type        = string
 }
 
 resource "docker_container" "test" {
-  image = docker_image.alpine.image_id
+  image = var.image_name
   name  = var.container_name
 
   command = [
