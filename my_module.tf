@@ -66,6 +66,7 @@ resource "coder_script" "git_clone_custom" {
   agent_id           = var.agent_id
   script             = <<-EOT
     #!/bin/bash
+    coder exp sync start "git-clone-custom"
     echo "Starting custom git clone module"
 
     if ! grep -q github.com ~/.ssh/known_hosts 2>/dev/null; then
@@ -91,7 +92,7 @@ resource "coder_script" "git_clone_custom" {
     chmod +x "${local.base_dir}/hello.sh"
 
     "${local.base_dir}/hello.sh" 2>&1
-
+    coder exp sync complete "git-clone-custom"
   EOT
   display_name       = "Git Clone Custom"
   icon               = "/icon/git.svg"
