@@ -14,10 +14,10 @@ terraform {
   }
 }
 
-/* data "local_file" "test_file" {
+data "local_file" "test_file" {
   filename = "/mnt/c/Users/janik.schoepper/git/test.txt"
 }
-
+/*
 variable "container_name" {
   description = "Name of the container."
   type        = string
