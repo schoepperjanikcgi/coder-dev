@@ -91,6 +91,11 @@ resource "coder_script" "git_clone_custom" {
     echo "Data ${data.coder_workspace_owner.me.name}"
     echo "Git clone finish"
 
+    echo "Git pull to update the repository"
+    cd "${local.base_dir}/py-container"
+    git pull
+    echo "Git pull finish"
+
     #echo "Start the script"
     #echo -n '${local.encoded_clone_script}' | base64 -d > "${local.base_dir}/hello.sh"
     #chmod +x "${local.base_dir}/hello.sh"

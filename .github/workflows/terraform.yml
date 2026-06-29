@@ -1,6 +1,6 @@
 # Okay so currently coder runs locally and I access it via an IP. Thus I cannot use the github to access
 # my coder as it requires an url to execute terraform plan and upload the templates to coder. This is definetly possible tho.
-# 
+# https://coder.com/docs/tutorials/testing-templates
 
 name: Terraform CI
 
