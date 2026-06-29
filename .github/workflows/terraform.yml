@@ -1,3 +1,7 @@
+# Okay so currently coder runs locally and I access it via an IP. Thus I cannot use the github to access
+# my coder as it requires an url to execute terraform plan and upload the templates to coder. This is definetly possible tho.
+# 
+
 name: Terraform CI
 
 on:
@@ -17,11 +21,11 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Set up Coder CLI
-        uses: coder/setup-action@v1
-        with:
-          access_url: "https://coder.example.com"
-          coder_session_token: ${{ secrets.cicd }}
+#      - name: Set up Coder CLI
+#        uses: coder/setup-action@v1
+#        with:
+#          access_url: "https://coder.example.com"
+#          coder_session_token: ${{ secrets.cicd }}
 
 #      - name: Terraform Format
 #        run: terraform fmt -check -recursive
@@ -32,5 +36,5 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Terraform Plan
-        run: terraform plan
+#      - name: Terraform Plan
+#        run: terraform plan
