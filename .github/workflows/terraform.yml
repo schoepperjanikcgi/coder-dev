@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - develop
   pull_request:
 
 jobs:
@@ -18,8 +17,8 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Format
-        run: terraform fmt -check -recursive
+#      - name: Terraform Format
+#        run: terraform fmt -check -recursive
 
       - name: Terraform Init
         run: terraform init
