@@ -82,11 +82,11 @@ resource "coder_script" "git_clone_custom" {
     git --version
 
     echo "Test if git clone works"
-    if [ ! -d ~/nodejs-test ]; then
+    if [ ! -d ~/py-container ]; then
       echo "Actually cloning..."
-      echo "Cloning ${var.url} into ${local.base_dir}/nodejs-test"
+      echo "Cloning ${var.url} into ${local.base_dir}/py-container"
       
-      git clone "${var.url}" "${local.base_dir}/nodejs-test"
+      git clone "${var.url}" "${local.base_dir}/py-container"
     fi
     echo "Data ${data.coder_workspace_owner.me.name}"
     echo "Git clone finish"
