@@ -14,7 +14,7 @@ terraform {
   }
 }
 
-data "local_file" "test_file" {
+/* data "local_file" "test_file" {
   filename = "/mnt/c/Users/janik.schoepper/git/test.txt"
 }
 
@@ -37,7 +37,7 @@ resource "docker_container" "test" {
     "-c",
     "while true; do echo Hello; sleep 60; done"
   ]
-} 
+}  */
 
 
 data "coder_workspace_owner" "me" {}
@@ -91,13 +91,13 @@ resource "coder_script" "git_clone_custom" {
     echo "Data ${data.coder_workspace_owner.me.name}"
     echo "Git clone finish"
 
-    echo "Start the script"
-    echo -n '${local.encoded_clone_script}' | base64 -d > "${local.base_dir}/hello.sh"
-    chmod +x "${local.base_dir}/hello.sh"
+    #echo "Start the script"
+    #echo -n '${local.encoded_clone_script}' | base64 -d > "${local.base_dir}/hello.sh"
+    #chmod +x "${local.base_dir}/hello.sh"
 
-    "${local.base_dir}/hello.sh" 2>&1
+    #"${local.base_dir}/hello.sh" 2>&1
 
-    echo "Test.txt content:  ${data.local_file.test_file.content})"
+    #echo "Test.txt content:  ${data.local_file.test_file.content})"
     coder exp sync complete "git-clone-custom"
   EOT
   display_name       = "Git Clone Custom"
